@@ -33,13 +33,23 @@ public class Usuario {
     @Size(min = 8)
     private String contrasena;
 
-    @ManyToMany
+    @OneToMany
+    @JoinTable(
+            name = "usuario_preferencia_categoria",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
     @Builder.Default
     @Column(name = "preferencia_categoria")
     @JsonIgnore
     private Set<Categoria> preferenciaCategoria = new HashSet<>();
 
-    @ManyToMany
+    @OneToMany
+    @JoinTable(
+            name = "usuario_preferencia_tienda",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "tienda_id")
+    )
     @Builder.Default
     @Column(name = "preferencia_tienda")
     @JsonIgnore

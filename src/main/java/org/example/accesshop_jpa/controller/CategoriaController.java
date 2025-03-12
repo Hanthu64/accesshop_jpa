@@ -22,13 +22,6 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     //GET
-    @GetMapping(value = {"", "/"}, params = {"buscar-categoria"})
-    public Page<Categoria> buscadorCategorias(@RequestParam("buscar-categoria") String buscarPorNombre
-            , Pageable pageable){
-        log.info("Resultados de " + buscarPorNombre);
-        return this.categoriaService.buscadorCategorias(Optional.of(buscarPorNombre), pageable);
-    }
-
     @GetMapping({"", "/"})
     public List<Categoria> all(){
         return categoriaService.all();

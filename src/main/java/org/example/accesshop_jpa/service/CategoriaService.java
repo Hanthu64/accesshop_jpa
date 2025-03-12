@@ -22,17 +22,10 @@ public class CategoriaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Page<Categoria> buscadorCategorias(Optional<String> nombreABuscar, Pageable pageable){
-        return this.categoriaRepository.buscadorCategorias(nombreABuscar.orElse(""), pageable);
-    }
-
     public List<Categoria> all(){return this.categoriaRepository.findAll();}
 
     public Categoria save(Categoria categoria){
         this.categoriaRepository.save(categoria);
-        categoria.getUsuariosPreferentes().forEach(p -> {
-            this.usuarioRepository.findById(p.getId());
-        });
         categoria.getProductos().forEach(p -> {
             this.categoriaRepository.findById(p.getId());
         });

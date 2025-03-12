@@ -27,12 +27,6 @@ public class Tienda {
 
     @ManyToMany
     @Builder.Default
-    @Column(name = "usuarios_preferentes")
-    @JsonIgnore
-    private Set<Usuario> usuariosPreferentes = new HashSet<>();
-
-    @ManyToMany
-    @Builder.Default
     @Column(name = "tienda_producto")
     @JsonIgnore
     private Set<Producto> tiendaProducto = new HashSet<>();

@@ -25,11 +25,7 @@ public class Categoria {
     @Size(min = 3)
     private String nombre;
 
-    @ManyToMany
-    @Builder.Default
-    public Set<Usuario> usuariosPreferentes = new HashSet<>();
-
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany
     @Builder.Default
     @JsonIgnore
     public Set<Producto> productos = new HashSet<>();

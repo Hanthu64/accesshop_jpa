@@ -1,7 +1,10 @@
 package org.example.accesshop_jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -21,8 +24,11 @@ public class Producto {
     @Size(min = 3)
     private String nombre;
 
+    @NotNull
+    private int valoracion;
+
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
-    private int valoracion;
+
 }

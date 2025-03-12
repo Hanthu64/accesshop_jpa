@@ -34,9 +34,6 @@ public class TiendaService {
 
     public Tienda save(Tienda tienda){
         this.tiendaRepository.save(tienda);
-        tienda.getUsuariosPreferentes().forEach(p -> {
-            this.usuarioRepository.findById(p.getId());
-        });
         tienda.getTiendaProducto().forEach(p -> {
             this.productoRepository.findById(p.getId());
         });

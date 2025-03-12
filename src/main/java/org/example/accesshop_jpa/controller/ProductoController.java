@@ -1,8 +1,11 @@
 package org.example.accesshop_jpa.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.accesshop_jpa.domain.Categoria;
 import org.example.accesshop_jpa.domain.Producto;
 import org.example.accesshop_jpa.domain.Tienda;
+import org.example.accesshop_jpa.dto.ProductoDTO;
+import org.example.accesshop_jpa.service.CategoriaService;
 import org.example.accesshop_jpa.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,9 @@ import java.util.Optional;
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private CategoriaService categoriaService;
 
     //GET
     @GetMapping(value = {"", "/"}, params = {"buscar-producto"})
@@ -40,7 +46,15 @@ public class ProductoController {
 
     //POST
     @PostMapping({"","/"})
-    public Producto newProducto(@RequestBody Producto producto) {
+    public Producto newProducto(@RequestBody ProductoDTO productoDTO) {
+        Categoria categoria = categoriaService.one(productoDTO.getCategoriaId());
+
+        Producto producto = Producto.builder()
+                .nombre(productoDTO.getNombre())
+                .valoracion(productoDTO.getValoracion())
+                .categoria(categoria)
+                .build();
+
         log.info("Creando un producto = " + producto);
         return this.productoService.save(producto);
     }
